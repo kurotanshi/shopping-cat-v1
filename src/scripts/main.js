@@ -3,11 +3,23 @@ import "@fortawesome/fontawesome-free/css/all.css"
 // 實作寫在這裡！
 
 import axios from "axios"
+import Cart from "./cart"
+
+const cart = new Cart()
+
+function renderItems(items) {
+  const cartList = document.querySelector("tbody")
+  cartList.innerHTML = ""
+
+  items.forEach((item) => {
+    const t = createCartItem(item)
+    cartList.insertAdjacentHTML("beforeend", t)
+  })
+}
 
 function addToCart(cat) {
-  const c = createCartItem(cat)
-  const cartList = document.querySelector("tbody")
-  cartList.insertAdjacentHTML("beforeend", c)
+  cart.addItem(cat)
+  renderItems(cart.items)
 }
 
 function setCatCartEvent(cats) {
@@ -19,10 +31,10 @@ function setCatCartEvent(cats) {
   })
 }
 
-function createCartItem({ id, name, price }) {
+function createCartItem({ id, name, price, quantity }) {
   const el = `<tr id="${id}">
       <td>${name}</td>
-      <td><input type="number" class="quantity" value="1" /></td>
+      <td><input type="number" class="quantity" value="${quantity}" /></td>
       <td>$${price}</td>
       <td>$20</td>
       <td>

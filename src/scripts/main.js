@@ -11,10 +11,15 @@ function renderItems(items) {
   const cartList = document.querySelector("tbody")
   cartList.innerHTML = ""
 
+  // items
   items.forEach((item) => {
     const t = createCartItem(item)
     cartList.insertAdjacentHTML("beforeend", t)
   })
+
+  // total
+  const totalEl = document.querySelector(".total-price")
+  totalEl.innerHTML = "$" + cart.total
 }
 
 function addToCart(cat) {
@@ -31,12 +36,14 @@ function setCatCartEvent(cats) {
   })
 }
 
-function createCartItem({ id, name, price, quantity }) {
+function createCartItem(item) {
+  const { id, name, price, quantity, total } = item
+
   const el = `<tr id="${id}">
       <td>${name}</td>
       <td><input type="number" class="quantity" value="${quantity}" /></td>
       <td>$${price}</td>
-      <td>$20</td>
+      <td>$${total}</td>
       <td>
         <button class="remove-item-btn btn btn-danger btn-sm">
           <i class="fas fa-trash-alt"></i>

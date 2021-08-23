@@ -9,6 +9,10 @@ class CartItem {
   increment(n = 1) {
     this.quantity += n
   }
+
+  get total() {
+    return this.price * this.quantity
+  }
 }
 
 export default CartItem

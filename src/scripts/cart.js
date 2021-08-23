@@ -15,6 +15,12 @@ class Cart {
       this.items.push(item)
     }
   }
+
+  get total() {
+    return this.items.reduce((acc, item) => {
+      return acc + item.total
+    }, 0)
+  }
 }
 
 export default Cart

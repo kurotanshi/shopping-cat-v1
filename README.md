@@ -1,16 +1,20 @@
-# Shopping Cart Practice with Vanilla JavaScript
+# Shopping Cat Practice with Vanilla JavaScript
 
-## stacks
+![shopping cat](screenshots/main.jpg)
 
-- fontawesome
-- bootstrap
-- parcel bundle
+Adopt, Don't Shop! 請以領養代替購買！
 
-## steps
+## Tech Stacks
 
-- make sure `yarn` is installed.
-- run `yarn install` to install all packages.
-- run `yarn run dev` or `yarn dev` to run a development server on your local machine.
+- Fontawesome
+- Bootstrap
+- Parcel
+
+## Setup Steps
+
+- Make sure `yarn` is installed.
+- Run `yarn install` to install all packages.
+- Run `yarn run dev` or `yarn dev` to run a development server on your local machine.
 - and write all implements in `src/main.js`.
 
 photo credits: [unsplash](https://unsplash.com/)

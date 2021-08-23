@@ -10,6 +10,13 @@ class CartItem {
     this.quantity += n
   }
 
+  setQuantity(quantity = 1) {
+    let q = Number(quantity)
+    if (q > 0) {
+      this.quantity = q
+    }
+  }
+
   get total() {
     return this.price * this.quantity
   }

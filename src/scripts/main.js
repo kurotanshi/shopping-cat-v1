@@ -27,6 +27,25 @@ function addToCart(cat) {
   renderItems(cart.items)
 }
 
+function setItemEvent() {
+  document.querySelector("tbody").addEventListener("click", (e) => {
+    if (e.target.hasAttribute("data-id")) {
+      const itemId = e.target.dataset.id
+      cart.removeItem(itemId)
+      renderItems(cart.items)
+    }
+  })
+
+  document.querySelector("tbody").addEventListener("change", (e) => {
+    if (e.target.hasAttribute("data-item-id")) {
+      const itemId = e.target.dataset.itemId
+      const quantity = e.target.value
+      cart.updateQuantity(itemId, quantity)
+      renderItems(cart.items)
+    }
+  })
+}
+
 function setCatCartEvent(cats) {
   const btns = document.querySelectorAll(".card .btn")
   btns.forEach((btn, i) => {
@@ -41,12 +60,14 @@ function createCartItem(item) {
 
   const el = `<tr id="${id}">
       <td>${name}</td>
-      <td><input type="number" class="quantity" value="${quantity}" /></td>
+      <td>
+        <input data-item-id="${id}" min="1" type="number" class="quantity" value="${quantity}" />
+      </td>
       <td>$${price}</td>
       <td>$${total}</td>
       <td>
-        <button class="remove-item-btn btn btn-danger btn-sm">
-          <i class="fas fa-trash-alt"></i>
+        <button data-id="${id}" class="remove-item-btn btn btn-danger btn-sm">
+          <i data-id="${id}" class="fas fa-trash-alt"></i>
         </button>
       </td>
     </tr>`
@@ -70,6 +91,8 @@ function createCatCard({ id, name, price, photo }) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  renderItems(cart.items)
+
   // 抓 api
   const endPoint =
     "https://raw.githubusercontent.com/5xTraining/shopping-cat-v1/main/data/cats.json"
@@ -85,6 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
       })
 
       setCatCartEvent(data)
+      setItemEvent()
     })
     .catch((err) => {
       console.log(err)

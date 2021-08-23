@@ -16,10 +16,24 @@ class Cart {
     }
   }
 
+  removeItem(id) {
+    this.items = this.items.filter((item) => item.id !== id)
+  }
+
+  updateQuantity(id, quantity) {
+    const foundItem = this.items.find((item) => item.id === id)
+
+    if (foundItem) {
+      foundItem.setQuantity(quantity)
+    }
+  }
+
   get total() {
-    return this.items.reduce((acc, item) => {
+    let result = this.items.reduce((acc, item) => {
       return acc + item.total
     }, 0)
+
+    return Math.floor(result * 100) / 100
   }
 }
 
